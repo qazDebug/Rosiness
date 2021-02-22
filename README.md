@@ -1,4 +1,6 @@
 # Rosiness 
+本框架 参考大神的  https://github.com/gmhevinci/MotionFramework
+                   https://github.com/EllanJiang/GameFramework
 Rosiness是一套基于Unity3D引擎的游戏框架。框架整体遵循轻量化、易用性、低耦合、扩展性强的设计理念,结构清晰，代码注释详细.
 
 支持版本
