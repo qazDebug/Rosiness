@@ -12,9 +12,10 @@ using Rosiness.Console;
 using Rosiness.Event;
 using Rosiness.Tween;
 using Rosiness.Audio;
-using System.Resources;
+using Rosiness.Resource;
 using Rosiness.Scene;
 using Rosiness.Pool;
+using Rosiness.Patch;
 
 public class GameLauncher : MonoBehaviour
 {
@@ -84,6 +85,9 @@ public class GameLauncher : MonoBehaviour
         // 创建音频管理器
         RosinessEngine.CreateModule<AudioManager>();
 
+        
+        RosinessEngine.CreateModule<TweenManager>();
+        
         // 创建场景管理器
         RosinessEngine.CreateModule<SceneManager>();
 

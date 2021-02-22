@@ -98,14 +98,14 @@ namespace Rosiness
 			return false;
 		}
 
-		/// <summary>
-		/// 创建游戏模块
-		/// </summary>
-		/// <typeparam name="T">模块类</typeparam>
-		/// <param name="priority">运行时的优先级，优先级越大越早执行。如果没有设置优先级，那么会按照添加顺序执行</param>
-		public static T CreateModule<T>(int priority = 0) where T:class, IModule
+        /// <summary>
+        /// 创建游戏模块
+        /// </summary>
+        /// <typeparam name="T">模块类</typeparam>
+        /// <param name="priority">运行时的优先级，优先级越大越早执行。如果没有设置优先级，那么会按照添加顺序执行</param>
+        public static T CreateModule<T>(int priority = 0) where T : class, IModule
         {
-			return CreateModule<T>(null, priority);
+            return CreateModule<T>(null, priority);
         }
 
 		/// <summary>
@@ -114,16 +114,16 @@ namespace Rosiness
 		/// <typeparam name="T">模块类</typeparam>
 		/// <param name="createParam">创建参数</param>
 		/// <param name="priority">运行时的优先级，优先级越大越早执行。如果没有设置优先级，那么会按照添加顺序执行</param>
-		private static T CreateModule<T>(object p, int priority = 0) where T : class, IModule
+		public static T CreateModule<T>(object p, int priority = 0) where T : class, IModule
         {
-            if(priority < 0)            
-				throw new Exception("The priority can not be negative");
-			if (Contains(typeof(T)))
-				throw new Exception($"Game module {typeof(T)} is already existed");
+            if (priority < 0)
+                throw new Exception("The priority can not be negative");
+            if (Contains(typeof(T)))
+                throw new Exception($"Game module {typeof(T)} is already existed");
 
-			if(priority == 0)
+            if (priority == 0)
             {
-				int minPriority = GetMinPriority();
+                int minPriority = GetMinPriority();
 				priority = --minPriority;
 			}
 
