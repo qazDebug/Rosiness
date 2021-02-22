@@ -8,4 +8,5 @@ Unity2018.4 && Unity2019.4
 C# && .Net4.x
 
 核心系统
-1.引擎 (RosinessEngine) 游戏框架的核心类，它负责游戏模块的创建和管理。
+1.引擎 (RosinessEngine) 游戏框架的核心类，它负责游戏模块的创建和管理.
+2.日志 (RosinessLog)
