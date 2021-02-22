@@ -11,6 +11,10 @@ using System;
 using Rosiness.Console;
 using Rosiness.Event;
 using Rosiness.Tween;
+using Rosiness.Audio;
+using System.Resources;
+using Rosiness.Scene;
+using Rosiness.Pool;
 
 public class GameLauncher : MonoBehaviour
 {
@@ -61,16 +65,33 @@ public class GameLauncher : MonoBehaviour
 
     private IEnumerator CreateGameModules()
     {
+        // 创建事件管理器
         RosinessEngine.CreateModule<EventManager>();
-        RosinessEngine.CreateModule<TweenManager>();
 
+        // 本地资源服务接口
+        LocalBundleServices bundleServices = new LocalBundleServices();
+        yield return bundleServices.InitializeAsync(SimulationOnEditor);
 
-        // 创建游戏业务逻辑相关的自定义模块
-        RosinessEngine.CreateModule<BattleManager>();
+        // 创建资源管理器
+        var resourceCreateParam = new ResourceManager.CreateParameters();
+        resourceCreateParam.LocationRoot = "Assets/GameRes";
+        resourceCreateParam.SimulationOnEditor = SimulationOnEditor;
+        resourceCreateParam.BundleServices = bundleServices;
+        resourceCreateParam.DecryptServices = null;
+        resourceCreateParam.AutoReleaseInterval = 10f;
+        RosinessEngine.CreateModule<ResourceManager>(resourceCreateParam);
 
-        RosinessEngine.GetModule<BattleManager>().Print();
+        // 创建音频管理器
+        RosinessEngine.CreateModule<AudioManager>();
 
-        yield return null;
+        // 创建场景管理器
+        RosinessEngine.CreateModule<SceneManager>();
+
+        // 创建对象池管理器
+        RosinessEngine.CreateModule<GameObjectPoolManager>();
+
+        // 最后创建游戏业务逻辑相关的自定义模块
+       
     }
 
     // Update is called once per frame
