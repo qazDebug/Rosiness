@@ -101,7 +101,7 @@ namespace Rosiness.Console
             if (_visible == false)
             {
                 // 显示按钮
-                if (GUI.Button(new Rect(posX + 10, posY + 10, ConsoleGUI.XStyle.fixedWidth, ConsoleGUI.XStyle.fixedHeight), "X", ConsoleGUI.XStyle))
+                if (GUI.Button(new Rect(posX + 10, posY + 10, ConsoleGUI.XStyle.fixedWidth, ConsoleGUI.XStyle.fixedHeight), "R", ConsoleGUI.XStyle))
                     _visible = true;
             }
             else
@@ -120,7 +120,7 @@ namespace Rosiness.Console
             GUILayout.BeginHorizontal();
             {
                 // 隐藏按钮
-                if (GUILayout.Button("X", ConsoleGUI.ButtonStyle, GUILayout.Width(ConsoleGUI.ButtonStyle.fixedHeight)))
+                if (GUILayout.Button("R", ConsoleGUI.ButtonStyle, GUILayout.Width(ConsoleGUI.ButtonStyle.fixedHeight)))
                     _visible = false;
 
                 // 绘制按钮栏
