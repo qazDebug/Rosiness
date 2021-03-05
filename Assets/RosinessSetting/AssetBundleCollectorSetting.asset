@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03fbe60c1624c6d419bdae44718fb346, type: 3}
   m_Name: AssetBundleCollectorSetting
   m_EditorClassIdentifier: 
-  Collectors: []
+  Collectors:
+  - CollectDirectory: Assets/GameRes/Test
+    CollectRule: 0
+    CollectorName: LabelByFolderPath
   DLCFiles: []

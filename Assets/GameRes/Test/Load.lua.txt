@@ -1,0 +1,4 @@
+local UE = CS.UnityEngine
+xlua.hotfix(CS.Test,'OnClickBtn',function ( self )
+	UE.Object.Destroy(self.Cube.gameobject)
+end)
