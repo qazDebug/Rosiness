@@ -71,8 +71,7 @@ public class GameLauncher : MonoBehaviour
         RosinessEngine.CreateModule<EventManager>();
 
         // 创建网络管理器
-        var networkCreateParam = new NetworkManager.CreateParameters();
-        networkCreateParam.PackageCoderType = typeof(ProtoPackageCoder);
+        var networkCreateParam = new NetworkManager.CreateParameters {PackageCoderType = typeof(ProtoPackageCoder)};
         RosinessEngine.CreateModule<NetworkManager>(networkCreateParam);
 
         // 本地资源服务接口
@@ -82,12 +81,14 @@ public class GameLauncher : MonoBehaviour
         // 创建资源管理器
         //// 直接使用通用的补丁管理器
         //IBundleServices bundleServices = MotionEngine.GetMoudle<PatchManager>();
-        var resourceCreateParam = new ResourceManager.CreateParameters();
-        resourceCreateParam.LocationRoot = "Assets/GameRes";
-        resourceCreateParam.SimulationOnEditor = SimulationOnEditor;
-        resourceCreateParam.BundleServices = bundleServices;
-        resourceCreateParam.DecryptServices = null;
-        resourceCreateParam.AutoReleaseInterval = 10f;
+        var resourceCreateParam = new ResourceManager.CreateParameters
+        {
+            LocationRoot = "Assets/GameRes",
+            SimulationOnEditor = SimulationOnEditor,
+            BundleServices = bundleServices,
+            DecryptServices = null,
+            AutoReleaseInterval = 10f
+        };
         RosinessEngine.CreateModule<ResourceManager>(resourceCreateParam);
 
         // 创建音频管理器
@@ -104,8 +105,7 @@ public class GameLauncher : MonoBehaviour
 
         // 最后创建游戏业务逻辑相关的自定义模块
         // 直接进入游戏
-        var luaCreateParam = new LuaManager.CreateParameters();
-        luaCreateParam.SimulationOnEditor = SimulationOnEditor;
+        var luaCreateParam = new LuaManager.CreateParameters {SimulationOnEditor = SimulationOnEditor};
         RosinessEngine.CreateModule<LuaManager>(luaCreateParam);
         LuaManager.Instance.StartGame();
     }
