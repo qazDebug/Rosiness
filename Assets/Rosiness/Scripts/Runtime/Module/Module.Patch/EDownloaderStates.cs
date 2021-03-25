@@ -4,21 +4,18 @@
 	日期：2021/3/19 18:59:25
 	功能：Nothing
 *****************************************************/
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class EDownloaderStates : MonoBehaviour
+namespace Rosiness.Patch
 {
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    /// 下载状态
+    /// </summary>
+    public enum EDownloaderStates
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        None,
+        Loading,
+        Failed,
+        Succeed,
+        Forbid,
     }
 }

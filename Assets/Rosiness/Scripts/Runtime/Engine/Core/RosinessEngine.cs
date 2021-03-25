@@ -174,7 +174,7 @@ namespace Rosiness
 		public static Coroutine StartCoroutine(IEnumerator coroutine)
 		{
 			if (_behaviour == null)
-				throw new Exception($"{nameof(RosinessEngine)} is not initialize. Use MotionEngine.Initialize");
+				throw new Exception($"{nameof(RosinessEngine)} is not initialize. Use RosinessEngine.Initialize");
 			return _behaviour.StartCoroutine(coroutine);
 		}
 
@@ -185,7 +185,7 @@ namespace Rosiness
 		public static void StopCoroutine(Coroutine coroutine)
 		{
 			if (_behaviour == null)
-				throw new Exception($"{nameof(RosinessEngine)} is not initialize. Use MotionEngine.Initialize");
+				throw new Exception($"{nameof(RosinessEngine)} is not initialize. Use RosinessEngine.Initialize");
 			_behaviour.StopCoroutine(coroutine);
 		}
 
@@ -195,7 +195,7 @@ namespace Rosiness
 		public static void StopAllCoroutines()
 		{
 			if (_behaviour == null)
-				throw new Exception($"{nameof(RosinessEngine)} is not initialize. Use MotionEngine.Initialize");
+				throw new Exception($"{nameof(RosinessEngine)} is not initialize. Use RosinessEngine.Initialize");
 			_behaviour.StopAllCoroutines();
 		}
 		#endregion

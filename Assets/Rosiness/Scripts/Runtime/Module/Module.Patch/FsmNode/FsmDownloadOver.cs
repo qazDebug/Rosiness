@@ -7,18 +7,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rosiness.AI;
 
-public class FsmDownloadOver : MonoBehaviour
+namespace Rosiness.Patch
 {
-    // Start is called before the first frame update
-    void Start()
+    internal class FsmDownloadOver : IFsmNode
     {
-        
-    }
+		private readonly PatchManagerImpl _patcher;
+		public string Name { private set; get; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+		public FsmDownloadOver(PatchManagerImpl patcher)
+		{
+			_patcher = patcher;
+			Name = EPatchStates.DownloadOver.ToString();
+		}
+
+        public void OnEnter()
+        {
+            PatchEventDispatcher.SendPatchStepsChangeMsg(EPatchStates.DownloadOver);
+        }
+
+        public void OnUpdate()
+        {
+        }
+
+        public void OnExit()
+        {
+        }
+
+        public void OnHandleMessage(object msg)
+        {
+        }
     }
 }
