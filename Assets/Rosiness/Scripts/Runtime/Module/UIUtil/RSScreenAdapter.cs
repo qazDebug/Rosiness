@@ -27,25 +27,25 @@ public class RSScreenAdapter : MonoBehaviour {
             CanvasScaler canvas = this.GetComponentInParent<CanvasScaler>();
             if (canvas) {
                 if (canvas.matchWidthOrHeight == 0) {
-                    rtf.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, rtf.rect.height * RSUI.adapterSizeRatioForMatchHeight);
+                    rtf.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, rtf.rect.height * RSUI.AdapterSizeRatioForMatchHeight);
                 }
             }
         }
 
-        Rect bound = RSUI.getBoundingRectToWorld(rtf);
+        Rect bound = RSUI.GetBoundingRectToWorld(rtf);
         Vector2 pos = rtf.localPosition;
         switch (alignMode) {
             case AlignMode.Top:
-                float top = RSUI.realResolution.y;
+                float top = RSUI.RealResolution.y;
                 if (safeArea) {
-                    top = RSUI.safeArea.yMax;
+                    top = RSUI.SafeArea.yMax;
                 }
                 pos.y += top - offset - bound.yMax;
                 break;
             case AlignMode.Bottom:
                 float bottom = 0;
                 if (safeArea) {
-                    bottom = RSUI.safeArea.yMin;
+                    bottom = RSUI.SafeArea.yMin;
                 }
                 pos.y += bottom - offset - bound.yMin;
                 break;

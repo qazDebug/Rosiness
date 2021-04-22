@@ -9,7 +9,7 @@ using System;
 using System.Runtime.InteropServices;
 using Rosiness;
 
-public class DDModeAView : MonoBehaviour {
+public class RSModeAView : MonoBehaviour {
     public RectTransform content;
     public RectTransform banner;
     public RectTransform body;
@@ -62,12 +62,12 @@ public class DDModeAView : MonoBehaviour {
     void adapterScreen() {
         float bannerHeight = banner ? banner.rect.height : 0;
         float othersHeight = 0;
-        banner.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, banner.rect.height * RSUI.adapterSizeRatioForMatchHeight);
+        banner.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, banner.rect.height * RSUI.AdapterSizeRatioForMatchHeight);
         if (body) {
             for (int i = this.content.childCount; --i >= 0; ) {
                 RectTransform _rtf = this.content.GetChild(i) as RectTransform;
                 if (_rtf != banner && _rtf != body) {
-                    _rtf.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, _rtf.rect.height * RSUI.adapterSizeRatioForMatchHeight);
+                    _rtf.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, _rtf.rect.height * RSUI.AdapterSizeRatioForMatchHeight);
                     othersHeight += _rtf.rect.height;
                 }
             }
@@ -76,7 +76,7 @@ public class DDModeAView : MonoBehaviour {
 
         float safeAreaTop = 0;
         if (screenAdapted) {
-            safeAreaTop = RSUI.realResolution.y - RSUI.safeArea.yMax;
+            safeAreaTop = RSUI.RealResolution.y - RSUI.SafeArea.yMax;
         }
         
         RectTransform rtf = this.transform as RectTransform;
@@ -84,7 +84,7 @@ public class DDModeAView : MonoBehaviour {
         rtf.anchorMax = new Vector2(1, 1);
         rtf.pivot = new Vector2(0, 1);
         rtf.offsetMax = new Vector2(rtf.offsetMax.x, extendViewport ? 0 : -safeAreaTop);
-        rtf.offsetMin = new Vector2(rtf.offsetMin.x, RSUI.safeArea.yMin + offsetBottom * RSUI.adapterSizeRatioForMatchHeight);
+        rtf.offsetMin = new Vector2(rtf.offsetMin.x, RSUI.SafeArea.yMin + offsetBottom * RSUI.AdapterSizeRatioForMatchHeight);
 
         content.anchorMin = new Vector2(0, 1);
         content.anchorMax = new Vector2(1, 1);
@@ -95,8 +95,8 @@ public class DDModeAView : MonoBehaviour {
         content.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 0, rtf.rect.height - (extendViewport ? safeAreaTop : 0) + bannerHeight);
 
         body.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, rtf.rect.height - (extendViewport ? safeAreaTop : 0) - othersHeight);
-        RosinessLog.Log("DDModeAView: " + RSUI.getBoundingRectToWorld(this.transform) 
-            + " content:" + RSUI.getBoundingRectToWorld(content) + " body: " + RSUI.getBoundingRectToWorld(body));
+        RosinessLog.Log("DDModeAView: " + RSUI.GetBoundingRectToWorld(this.transform) 
+            + " content:" + RSUI.GetBoundingRectToWorld(content) + " body: " + RSUI.GetBoundingRectToWorld(body));
 
 
         minPosY = content.localPosition.y;

@@ -14,7 +14,7 @@ public class RSPageScrollRect : RSScrollRect {
     protected float pageWidth = 0;
     protected float pageHeight = 0;
 
-    void Start() {
+    public override void Start() {
         base.Start();
 	}
 

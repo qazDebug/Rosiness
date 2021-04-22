@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
 using System.Runtime.InteropServices;
+using Object = UnityEngine.Object;
 
 namespace Rosiness {
     public class RSUI {
@@ -15,51 +16,51 @@ namespace Rosiness {
         private static float _adapterSizeRatioForMatchHeight = 1;
         private static Rect _safeArea = Rect.zero;
 
-        public static Vector2 screenResolution {
+        public static Vector2 ScreenResolution {
             get {
-                computeResolution();
+                ComputeResolution();
                 return _screenResolution;
             }
         }
 
-        public static Vector2 designedResolution {
+        public static Vector2 DesignedResolution {
             get {
-                computeResolution();
+                ComputeResolution();
                 return _designedResolution;
             }
         }
 
-        public static Vector2 realResolution {
+        public static Vector2 RealResolution {
             get {
-                computeResolution();
+                ComputeResolution();
                 return _realResolution;
             }
         }
 
-        public static Vector2 scaleForScreen {
+        public static Vector2 ScaleForScreen {
             get {
-                computeResolution();
+                ComputeResolution();
                 return _scaleForScreen;
             }
         }
 
-        public static float adapterSizeRatioForMatchHeight {
+        public static float AdapterSizeRatioForMatchHeight {
             get {
-                computeResolution();
+                ComputeResolution();
                 return _adapterSizeRatioForMatchHeight;
             }
         }
 
-        public static Rect safeArea {
+        public static Rect SafeArea {
             get {
-                computeResolution();
+                ComputeResolution();
                 return _safeArea;
             }
         }
 
-        public static void computeResolution(bool recompute = false) {
+        private static void ComputeResolution(bool recompute = false) {
             if (_designedResolution == Vector2.zero || recompute) {
-                CanvasScaler canvas = GameObject.FindObjectOfType<CanvasScaler>();
+                CanvasScaler canvas = Object.FindObjectOfType<CanvasScaler>();
                 if (!canvas) {
                     RosinessLog.Error("DDUI.computeResolution could not find Canvas");
                     return;
@@ -67,7 +68,7 @@ namespace Rosiness {
                 _designedResolution = canvas.referenceResolution;
                 _realResolution = new Vector2(_designedResolution.x, Screen.height * _designedResolution.x / Screen.width);
 
-                _scaleForScreen = new Vector2(Screen.width / realResolution.x, Screen.height / realResolution.y);
+                _scaleForScreen = new Vector2(Screen.width / RealResolution.x, Screen.height / RealResolution.y);
                 //if (Screen.height / Screen.width < _designedResolution.y / _designedResolution.x) {
                 if ((float)Screen.height / Screen.width < 960f / 640) {
                     _adapterSizeRatioForMatchHeight = _designedResolution.x / (_designedResolution.y * Screen.width / Screen.height);
@@ -80,22 +81,22 @@ namespace Rosiness {
                 //rect.y = 1 - rect.yMax;
                 //_safeArea = new Rect(rect.x * _realResolution.x, rect.y * _realResolution.y, rect.width * _realResolution.x, rect.height * _realResolution.y);
 
-                RosinessLog.Log("DDUI.computeResolution Screen: " + Screen.width + "x" + Screen.height + " scale: " + _scaleForScreen
+                RosinessLog.Log("RSUI.computeResolution Screen: " + Screen.width + "x" + Screen.height + " scale: " + _scaleForScreen
                     + " adapterSizeRatioForMatchHeight: " + _adapterSizeRatioForMatchHeight
                     + " Canvas: " + _designedResolution + " -> " + _realResolution + " SafeArea: " + _safeArea);
             }
         }
 
-        public static Vector2 transScreenToWorld(Vector2 p) {
-            computeResolution();
+        public static Vector2 TransScreenToWorld(Vector2 p) {
+            ComputeResolution();
             return new Vector2(p.x / _scaleForScreen.x, p.y / _scaleForScreen.y);
         }
 
-        public static Rect getBoundingRectToWorld(GameObject gameObject, bool designed = true) {
-            return getBoundingRectToWorld(gameObject.transform);
+        public static Rect GetBoundingRectToWorld(GameObject gameObject, bool designed = true) {
+            return GetBoundingRectToWorld(gameObject.transform);
         }
 
-        public static Rect getBoundingRectToWorld(Transform tf, bool designed = true) {
+        public static Rect GetBoundingRectToWorld(Transform tf, bool designed = true) {
             RectTransform rtf = tf as RectTransform;
             //BELog.debug("DUHelper.getGameObjectWorldRect " + rtf.position);
             //BELog.debug("DUHelper.getGameObjectWorldRect " + obj.transform.parent.TransformPoint(rtf.localPosition));
@@ -114,7 +115,7 @@ namespace Rosiness {
             //BELog.debug("DUHelper.getGameObjectWorldRect " + Screen.width + ", " + Screen.height);
 
             if (designed) {
-                computeResolution();
+                ComputeResolution();
                 rect = new Rect(rect.x / _scaleForScreen.x, rect.y / _scaleForScreen.y, rect.width / _scaleForScreen.x, rect.height / _scaleForScreen.y);
             }
             return rect;

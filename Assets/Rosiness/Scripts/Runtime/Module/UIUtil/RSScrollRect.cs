@@ -127,7 +127,7 @@ public class RSScrollRect : ScrollRect {
         return v;
     }
 
-    public virtual void Start() {
+    public new virtual void Start() {
         base.Start();
         this.movementType = MovementType.Unrestricted;
         this.inertia = false;
@@ -151,7 +151,7 @@ public class RSScrollRect : ScrollRect {
     public override void OnDrag(PointerEventData eventData) {
         //BELog.info("RSScrollRect.OnDrag: " + eventData.position + " " + eventData.delta + "@" + eventData.clickTime);
         //base.OnDrag(eventData);
-        Vector2 delta = RSUI.transScreenToWorld(eventData.delta);
+        Vector2 delta = RSUI.TransScreenToWorld(eventData.delta);
         doScroll(delta, true);
         gatherTouchMove(delta);
     }
@@ -159,7 +159,7 @@ public class RSScrollRect : ScrollRect {
     public override void OnEndDrag(PointerEventData eventData) {
         RosinessLog.Log("RSScrollRect.OnEndDrag: " + eventData.position + " " + eventData.delta + "@" + eventData.clickTime + ",");
         //base.OnEndDrag(eventData);
-        Vector2 delta = RSUI.transScreenToWorld(eventData.delta);
+        Vector2 delta = RSUI.TransScreenToWorld(eventData.delta);
         gatherTouchMove(delta);
         startAdjust(delta);
     }

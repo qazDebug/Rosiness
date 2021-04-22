@@ -9,15 +9,15 @@ using System;
 using System.Runtime.InteropServices;
 using Rosiness;
 
-public class DDModeAInnerView : RSScrollRect {
-    private DDModeAView rootView;
+public class RSModeAInnerView : RSScrollRect {
+    private RSModeAView rootView;
     private ScrollRect outerScrollRect;
 
     private ScrollRect currentRect;
 
 
 	// Use this for initialization
-	void Start () {
+    public override void Start () {
         base.Start();
 
         if (this.horizontal) {
@@ -26,7 +26,7 @@ public class DDModeAInnerView : RSScrollRect {
         this.horizontal = false;
         this.vertical = true;
 
-        rootView = this.GetComponentInParent<DDModeAView>();
+        rootView = this.GetComponentInParent<RSModeAView>();
         if (!rootView) {
             RosinessLog.Error("ModeAScrollRect 未找到DDModeAView的对象");
         }
@@ -62,7 +62,7 @@ public class DDModeAInnerView : RSScrollRect {
         //BELog.debug("ModeAScrollRect.OnDrag: " + eventData.position + " " + eventData.delta + "@" + eventData.clickTime);
         if (this.currentRect == this) {
             //base.OnDrag(eventData);
-            Vector2 delta = RSUI.transScreenToWorld(eventData.delta);
+            Vector2 delta = RSUI.TransScreenToWorld(eventData.delta);
             doMoveAsLinked(delta.y);
             gatherTouchMove(delta);
         } else if (currentRect) {
@@ -74,7 +74,7 @@ public class DDModeAInnerView : RSScrollRect {
         RosinessLog.Log("ModeAScrollRect.OnEndDrag: " + eventData.position + " " + eventData.delta + "@" + eventData.clickTime);
         if (this.currentRect == this) {
             //base.OnEndDrag(eventData);
-            Vector2 delta = RSUI.transScreenToWorld(eventData.delta);
+            Vector2 delta = RSUI.TransScreenToWorld(eventData.delta);
             gatherTouchMove(delta);
             startAdjust(delta);
         } else if (currentRect) {
