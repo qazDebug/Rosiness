@@ -71,7 +71,7 @@ namespace Rosiness.ActionAnimator
             ParentAction?.RemoveAction (this);
         }
 
-        public void Kill()
+        public virtual void Kill()
         {
             _tw?.Kill();
         }
